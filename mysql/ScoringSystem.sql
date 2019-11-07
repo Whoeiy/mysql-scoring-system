@@ -24,6 +24,8 @@ drop table if exists student;
 
 drop table if exists summary;
 
+drop table if exists department;
+
 /*==============================================================*/
 /* Table: course                                                */
 /*==============================================================*/
@@ -59,8 +61,10 @@ create table extra_name
 (
    no                   int not null auto_increment,
    extra                char(10) not null,
-   detail               char(2) not null,
    name                 char(50) not null,
+   detail               char(2) not null,
+   max                  char(5),
+   min                  char(5) not null,
    primary key (no)
 );
 
@@ -146,6 +150,7 @@ create table student
    s_name               varchar(10) not null,
    s_class              char(5) not null,
    s_pro                char(6) not null,
+   s_feature            char(50) not null,
    primary key (s_no)
 );
 
@@ -164,6 +169,18 @@ create table summary
    s_grade              char(5) not null,
    primary key (no)
 );
+
+/*==============================================================*/
+/* Table: department                                            */
+/*==============================================================*/
+create table department 
+(
+   d_no                 char(10) not null,
+   department           char(25) not null,
+   major                char(25) not null,
+   primary key (d_no)
+);
+
 
 create index FK_s_grade on grade_by_course(s_no);
 create index FK_corresponding1 on extra_name(extra);
