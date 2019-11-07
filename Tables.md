@@ -7,6 +7,21 @@
    - PRIMARY KEY
 2. 姓名 *s_name*：varchar(10)
 3. 班级 *s_class*：char(5)——‘1701‘
+4. 系别专业 *s_pro*：char(6)
+5. 属性 s_feature
+   - char(50)
+
+
+
+# 系部表 department
+
+1. 编号 *d_no*
+   - char(10)
+   - PRIMARY KEY
+2. 系别/学院 *department*
+   - char(25)
+3. 专业 *major*
+   - char(25)
 
 
 
@@ -16,17 +31,20 @@
    - int
    - auto_increment 
    - PRIMARY KEY
-2. 学号 *s_no*
+2. 年份 year
    - char(10)
-3. 德育 *s_me*
+3. 学号 *s_no*
+   - char(10)
+   - **FOREIGN KEY**
+4. 德育 *s_me*
    - char(5)
-4. 智育 *s_ie*
+5. 智育 *s_ie*
    - char(5)
-5. 体育 *s_pe*
+6. 体育 *s_pe*
    - char(5)
-6. 总分 *s_total*
+7. 总分 *s_total*
    - char(5)
-7. 学习成绩 *s_grade*
+8. 学习成绩 *s_grade*
    - char(5)
 
 
@@ -38,27 +56,25 @@
    - int
    - auto_increment 
    - PRIMARY KEY
-
-2. 学号 *s_no*
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
 
    - char(10)
    - **FOREIGN KEY**
-
-3. 基础分 *me_basic*
+4. 基础分 *me_basic*
 
    - int
 
    - 有default值
-
-4. 加分项总分 *me_extra*
-
-   - char(5)
-
-5. 减分项总分 *me_minus*
+5. 加分项总分 *me_extra*
 
    - char(5)
+   - sum()
+6. 减分项总分 *me_minus*
 
-6. 总分 *me_total*
+   - char(5)
+7. 总分 *me_total*
 
    - char(5)
    - 总分 = 加分总分 - 减分总分
@@ -69,113 +85,73 @@
 
 
 
-### 德育加分项统计表 me_extra
+### 标准：德育加分项统计me_extra 
 
-1. <u>序号</u> *no*
-
-   - int
-   - auto_increment 
-   - PRIMARY KEY
-
-2. 学号 *s_no*
-
-   - char(10)
-   - **FOREIGN KEY**
-
-3. 助人为乐 *me_etr_1*
-
-   - char(5)
-
+1. 助人为乐 *me_etr_1*
+- char(5)
+   
    - 基础分：1分
    - 最高分：2分
-
-4. 志愿服务活动 *me_etr_2*
+2. 志愿服务活动 *me_etr_2*
 
    - char(5)
 
    - 基础分：0.5分？
    - 最高分：2分
-
-5. 集体活动 *me_etr_3*
+3. 集体活动 *me_etr_3*
 
    - char(5)
 
    - 基础分
    - 最高分：2分
-
-6. 学生干部 *me_etr_4*
+4. 学生干部 *me_etr_4*
 
    - char(5)
 
    - 可能分值：0，2，2.5，3分
    - 最高分：3分
-
-7. 发表作品(?) *me_etr_5*
+5. 发表作品(?) *me_etr_5*
 
    - char(5)
 
    - 可能分值：0，0.5，1，1.5，2分
    - 最高分：2分
-
-8. 献血 *me_etr_6*
+6. 献血 *me_etr_6*
 
    - char(5)
 
    - 可能分值：0，1.5分
-
-9. 获奖 *me_etr_7*
+7. 获奖 *me_etr_7*
 
    - char(5)
 
    - 可能分值：0，1，1.5，2分
    - 最高分：有吗？
+8. 先进集体 *me_etr_8*
 
-10. 先进集体 *me_etr_8*
-    - char(5)
+  - char(5)
 
-    - 可能分值：0，0.5，1，1.5分
-    - 最高分：有吗？
+  - 可能分值：0，0.5，1，1.5分
+  - 最高分：有吗？
+9. 各项活动 *me_etr_9*
 
-11. 各项活动 *me_etr_9*
+   - char(5)
 
-    - char(5)
+   - 可能分值：0，0.2的倍数，0.5倍数
+   - 最高分：3分
+   - 自行补充的活动每项0.2分
+10. 假期值班 *me_etr_10*
 
-    - 可能分值：0，0.2的倍数，0.5倍数
-    - 最高分：3分
-    - 自行补充的活动每项0.2分
+   - char(5)
 
-12. 假期值班 *me_etr_10*
-
-    - char(5)
-
-    - 可能分值：0，0.5，1，1.5分
-    - 最高分：1.5分（根据身份而不同）？
-
-13. 加分总分 *me_extra*
-
-    - char(5)
-    - me_extra = me_etr_1+...+me_etr_10
+   - 可能分值：0，0.5，1，1.5分
+   - 最高分：1.5分（根据身份而不同）？
 
 
 
+### 标准：德育减分项统计 me_minus
 
-
-
-
-### 德育减分项统计表 me_minus
-
-1. <u>序号</u> *no*
-
-   - int
-   - auto_increment 
-   - PRIMARY KEY
-
-2. 学号 *s_no*
-
-   - char(10)
-   - **FOREIGN KEY**
-
-3. 卫生差 *me_mns_1*
+1. 卫生差 *me_mns_1*
 
    - char(5)
 
@@ -188,10 +164,6 @@
    - 每被登记一次扣去0.5分
    - 有上限吗？应该没有
 
-5. 扣分总分 *me_minus*
-
-   - char(5)
-   - me_minus = me_mns_1 + me_mns_2
 
 
 
@@ -202,41 +174,30 @@
    - int
    - auto_increment 
    - PRIMARY KEY
-
-2. 学号 *s_no*
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
 
    - char(10)
    - **FOREIGN KEY**
-
-3. 学习成绩——最后得分 *s_studyscore*
+4. 学习成绩——最后得分 *s_studyscore*
 
    - char(5)
 
    - 考试课平均分、考查课平均分、总分均与**二级表学习成绩总表**关联
    - 最后得分不超过60分
    - <u>**最后得分 = 总分 * 0.65**</u>
+5. 学术成果加分 *ie_extra*
 
-4. 学术成果加分 *ie_extra*
+   - char(5)
+6. 总分 *ie_total*
 
    - char(5)
 
-5. 总分 *ie_total*
-
-   - char(5)
 
 
+## 标准：学术成果加分项统计 ie_extra
 
-## 学术成果加分项统计表 ie_extra
-
-1. <u>序号</u> *no*
-
-   - int
-   - auto_increment 
-   - PRIMARY KEY
-2. 学号 *s_no*
-
-   - char(10)
-   - **FOREIGN KEY**
 3. 发表学术论文 *ie_etr_1*
 
    - char(5)
@@ -249,35 +210,34 @@
 5. 暑期社会实践 *ie_etr_3*
 
    - char(5)
-- 可能分值：0，1，1.5 
-6. 学术成果加分总分 *ie_extra*
-   - char(5)
-   - ie_extra = ie_etr_1+...+ie_etr_3
+   - 可能分值：0，1，1.5 
 
 
 
-## 学习成绩总表 grade
+##学习成绩总表 grade
 
 1. <u>序号</u> *no*
    - int
    - auto_increment 
    - PRIMARY KEY
-2. 学号 *s_no*
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
    - char(10)
    - **FOREIGN KEY**
-3. 考试课总分 *s_test_total*
+4. 考试课总分 *s_test_total*
    - char(5)
    - *s_test_total*=
-4. 考试课**平均分** *s_test_avg*
+5. 考试课**平均分** *s_test_avg*
    - char(5)
    - *s_test_avg* = s_test_total / 
-5. 考查课总分 *s_exam_total*
+6. 考查课总分 *s_exam_total*
    - char(5)
    - s_exam_total=
-6. 考查课**平均分** *s_exam_avg*
+7. 考查课**平均分** *s_exam_avg*
    - char(5)
    - *s_exam_avg*=
-7. 总分 *s_grade*
+8. 总分 *s_grade*
    - char(5)
    - 总分 = 考试课平均分 * 0.6 + 考查课平均分 * 0.4
 
@@ -310,13 +270,15 @@
    - int
    - auto_increment 
    - PRIMARY KEY
-2. 学号 *s_no*
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
    - char(10)
    - **FOREIGN KEY**
-3. 课程号 crs_no
+4. 课程号 crs_no
    - char(15)
    - **FOREIGN KEY**
-4. 成绩 *crs_grade*
+5. 成绩 *crs_grade*
    - char(5)
 
 
@@ -327,43 +289,36 @@
    - int
    - auto_increment 
    - PRIMARY KEY
-2. 学号 *s_no*
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
    - char(10)
    - **FOREIGN KEY**
-3. 基础分 *pe_basic*
+4. 基础分 *pe_basic*
    - char(5)
    - <=49：5
    - \>=50：6
-4. 体质健康测量 *pe_test*
+5. 体质健康测量 *pe_test*
    - char(5)
    - 51~59：0.5
    - 60~79：1
    - \>=80：2
-5. 体育加分项 *pe_extra*
+6. 体育加分项 *pe_extra*
    - char(5)
-6. 总分 *pe_total*
+7. 总分 *pe_total*
    - char(5)
 
 
 
-## 体育加分项统计表 pe_extra
+### 标准：体育加分项统计 pe_extra
 
-1. <u>序号</u> *no*
-
-   - int
-   - auto_increment 
-   - PRIMARY KEY
-2. 学号 *s_no*
-
-   - char(10)
-   - **FOREIGN KEY**
 3. 校级以上运动会 *pe_etr_1*
 
    - char(5)
    - 可能分值：2，1，0.5
    - 最高分：？
    - 累加吗？
-4. 校级运动会 *pe_etr_2*
+4. 校级运动会  
 
    - char(5)
 
@@ -382,9 +337,67 @@
    - char(5)
    - 可能分值：1，0.5
    - 最高分：1分
-7. 体育加分项总分 *pe_extra*
+
+
+
+#加减分明细表 extra
+
+1. <u>序号</u> *no*
+
+   - int
+   - auto_increment 
+   - PRIMARY KEY
+2. 年份 year
+   - char(10)
+3. 学号 *s_no*
+
+   - char(10)
+   - **FOREIGN KEY**
+4. 类别 extra
+   - char(10)
+   - **FOREIGN KEY**
+5. 加分项明细 *detail*
+   - char(2)
+   - 用存储过程实现序号的限制
+6. 说明 remarks
+   - text
+   - 只在申请其他加分项时填写
+   - null
+7. 学生申请分数 *s_point*
    - char(5)
-   - pe_extra = pe_etr_1+...+ie_etr_4
+8. 审核小组分数 *g_point*
+   - char(5)
+   - 初始等于s_point
+9. 审核状态 *status*
+   - char(2)
+
+
+
+# 加减分名称表 extra_name
+
+1. <u>序号</u> *no*
+
+   - int
+   - auto_increment 
+   - PRIMARY KEY
+2. 类别 extra
+   - char(10)
+   - ie_etr me_mns me_etr pe_etr
+3. 加分项明细 *detail*
+   - char(2)
+   - **FOREIGN KEY**
+4. 加分项名称 name
+   - char(50)
+5. 最高分 *max*
+   - char(5)
+   - null
+6. 最低分 *min*
+   - char(5)
+   - not null
+
+
+
+
 
 
 
