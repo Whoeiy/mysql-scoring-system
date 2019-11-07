@@ -214,7 +214,7 @@
 
 
 
-##学习成绩总表 grade
+##学习成绩总表 grade(有空再做)
 
 1. <u>序号</u> *no*
    - int
@@ -237,7 +237,7 @@
 7. 考查课**平均分** *s_exam_avg*
    - char(5)
    - *s_exam_avg*=
-8. 总分 *s_grade*
+8. 加权平均分总分 *s_weight_mean*
    - char(5)
    - 总分 = 考试课平均分 * 0.6 + 考查课平均分 * 0.4
 
@@ -254,13 +254,19 @@
 
    - char(20)
 
-3. 课程类型 *crs_type*
+3. 课程学分 crs_point
+
+   - char(5)
+
+4. 课程类型 *crs_type*
 
    - char(5)
 
    - t：考试课
 
      e：考查课
+
+   
 
 
 
@@ -370,6 +376,9 @@
    - 初始等于s_point
 9. 审核状态 *status*
    - char(2)
+10. 通过状态 *pass*
+    - char(2)
+    - not null
 
 
 
