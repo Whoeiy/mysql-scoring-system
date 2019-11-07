@@ -33,6 +33,7 @@ create table course
 (
    crs_no               char(15) not null,
    crs_name             char(20) not null,
+   crs_point            char(5) not null,
    crs_type             char(5) not null,
    primary key (crs_no)
 );
@@ -51,6 +52,7 @@ create table extra
    s_point              char(5) not null,
    g_point              char(5) not null,
    status               char(2) not null,
+   pass                 char(2) not null,
    primary key (no)
 );
 
@@ -61,8 +63,8 @@ create table extra_name
 (
    no                   int not null auto_increment,
    extra                char(10) not null,
-   name                 char(50) not null,
    detail               char(2) not null,
+   name                 char(50) not null,
    max                  char(5),
    min                  char(5) not null,
    primary key (no)
@@ -80,7 +82,7 @@ create table grade
    s_test_avg           char(5) not null,
    s_exam_total         char(5) not null,
    s_exam_avg           char(5) not null,
-   s_grade              char(5) not null,
+   s_weight_mean        char(5) not null,
    primary key (no)
 );
 
