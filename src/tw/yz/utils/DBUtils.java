@@ -76,4 +76,15 @@ public class DBUtils {
 		{
 			DBUtils.closeAll(con,null,null,cstmt,null);
 		}
+		
+		public static void close(Connection con, PreparedStatement pstmt, ResultSet rs)
+		{
+			DBUtils.closeAll(con,null,pstmt,null,rs);
+		}
+		
+		public static void close(Connection con, CallableStatement cstmt,ResultSet rs)
+		{
+			DBUtils.closeAll(con,null,null,cstmt,rs);
+		}
+		
 }

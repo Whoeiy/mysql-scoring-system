@@ -1,7 +1,6 @@
 package tw.yz.domain;
 
 public class ExtraName {
-	private int no;
 	private String extra;
 	private String detail;
 	private String name;
@@ -10,12 +9,12 @@ public class ExtraName {
 	
 	public ExtraName() {}
 	
-	public int getNo() {
-		return no;
-	}
-
-	public void setNo(int no) {
-		this.no = no;
+	public ExtraName(String extra, String detail, String name) {
+		this.extra = extra;
+		this.detail = detail;
+		this.name = name;
+		this.max = null;
+		this.min = null;	
 	}
 
 	public String getExtra() {

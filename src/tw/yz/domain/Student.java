@@ -9,6 +9,14 @@ public class Student {
 	
 	public Student() {}
 	
+	public Student(String sno, String sname, String sclass, String spro, String sfeature) {
+		this.s_no  = sno;
+		this.s_name = sname;
+		this.s_class = sclass;
+		this.s_pro = spro;
+		this.s_feature = sfeature;
+	}
+	
 	
 	public String getS_no() {
 		return s_no;
