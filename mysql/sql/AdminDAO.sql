@@ -8,10 +8,10 @@ use scoring_system;
 #   author:
 
 delimiter $$
-create procedure proc_insert_student(in sno char(10),in sname varchar(10), in sclass char(5), in spro char(6), in sfeature char(50))
+create procedure proc_insert_student(in sno char(10),in sname varchar(10), in sclass char(5), in spro char(6), in sfeature char(50), out flag int)
 modifies sql data
 begin
-    insert into student values(sno,sname,sclass,spro,sfeature);
+    
 end $$
 delimiter ;
 
@@ -25,9 +25,8 @@ create procedure proc_delete_student(in sno char(10),out flag int)
 modifies sql data
 begin
     set flag = 0;
-    delete * from student where s_no = sno;
+    delete from student where s_no = sno;
     set flag = 1;
-    return flag;
 end $$
 delimiter ;
 
@@ -53,7 +52,6 @@ begin
         update student set s_feature = supdate where s_no = sno;
         set flag = 1;
     end if;
-    return flag;
 end $$
 delimiter ;
 
