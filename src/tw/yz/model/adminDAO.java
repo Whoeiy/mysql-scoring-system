@@ -5,7 +5,7 @@ import java.util.List;
 
 import tw.yz.domain.Student;
 
-public interface adminManageDAO {
+public interface adminDAO {
 	public int addStudent(Student stu);
 	public int deleteStudent(String sno);
 	public int updateStudent(String sno, String update, int flag);

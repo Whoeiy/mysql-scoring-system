@@ -10,9 +10,8 @@ import java.util.List;
 import tw.yz.domain.Student;
 import tw.yz.utils.DBUtils;
 
-public class adminManageDAOImpl implements adminManageDAO{
+public class AdminCRUD_DAO{
 
-	@Override
 	public int addStudent(Student stu) {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -37,9 +36,7 @@ public class adminManageDAOImpl implements adminManageDAO{
 		}
 		return flag;
 	}
-
 	
-	@Override
 	public int deleteStudent(String sno) {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -61,7 +58,6 @@ public class adminManageDAOImpl implements adminManageDAO{
 		return flag;
 	}
 
-	@Override
 	public int updateStudent(String sno, String update, int flag) {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -84,8 +80,6 @@ public class adminManageDAOImpl implements adminManageDAO{
 		return flag;	
 	}
 
-
-	@Override
 	public List<Student> getStudent(String sselect, int flag) {
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -120,5 +114,4 @@ public class adminManageDAOImpl implements adminManageDAO{
 		return list;
 	}
 
-	
 }

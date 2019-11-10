@@ -9,12 +9,12 @@ public class ExtraName {
 	
 	public ExtraName() {}
 	
-	public ExtraName(String extra, String detail, String name) {
+	public ExtraName(String extra, String detail, String name, String max, String min) {
 		this.extra = extra;
 		this.detail = detail;
 		this.name = name;
-		this.max = null;
-		this.min = null;	
+		this.max = max;
+		this.min = min;	
 	}
 
 	public String getExtra() {
