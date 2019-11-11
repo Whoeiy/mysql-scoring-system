@@ -9,10 +9,11 @@ use scoring_system;
 #   author: 于越
 
 delimiter $$
-create procedure proc_isin_student_s_no(in sno char(10), out isin int)
+drop procedure if exists proc_isin_student_s_no;
+create procedure proc_isin_student_s_no(in sno char(10))
 reads sql data
 begin
-    select count(*) into isin from student where s_no = sno;
+    select count(*) as flag from student where s_no = sno;
 end $$
 delimiter ;
 

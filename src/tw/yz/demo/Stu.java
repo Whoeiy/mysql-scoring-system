@@ -1,36 +1,34 @@
 package tw.yz.demo;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import tw.yz.domain.Extra;
 import tw.yz.domain.ExtraName;
 import tw.yz.domain.StuUser;
-import tw.yz.model.stuDeclareDAOImpl;
+import tw.yz.model.stuDeclareDAO;
 
-public class Student {
-	static StuUser u_stu = new StuUser("170101008","2018~2019");
-	public void ExtraPoint() {
+public class Stu {
+//	static StuUser u_stu = new StuUser("170101008","2018~2019");
+	public static void ExtraPoint(StuUser u_stu) {
 		
 		System.out.println("\n");
 		System.out.println("\t** // 同学, 欢迎你 \\ **");
 		System.out.println("\t* 请选择功能: ");
 		System.out.println("\t  1. \t申请加(减)分项");
 		System.out.println("\t  2. \t查看已申请的加(减)分项");
-		System.out.println("\t  3. \t修改已申请的加(减)分项");
-		System.out.println("\t  4. \t删除已申请的加(减)分项");
+		System.out.println("\t  3. \t修改已申请的加(减)分项(未启用)");
+		System.out.println("\t  4. \t删除已申请的加(减)分项(未启用)");
 		System.out.println("\t  5. \t退出系统");
 		System.out.print("\t* 请输入序号: ");
 		Scanner in = new Scanner(System.in);
 		String k = in.next();
-		in.close();
 		if(k.equals("1")) {
-			Declare();
+			Declare(u_stu);
 		}
 		else if(k.equals("2")) {
-			Search();
+			Search(u_stu);
 		}
 		else if(k.equals("3")) {
 			
@@ -48,8 +46,8 @@ public class Student {
 	 * 1. 申请加分项
 	 */
 	
-	public static void Declare() {
-		stuDeclareDAOImpl declare = new stuDeclareDAOImpl();
+	public static void Declare(StuUser u_stu) {
+		stuDeclareDAO declare = new stuDeclareDAO();
 		
 		Extra etr = new Extra();
 		etr.setYear(u_stu.getYear());
@@ -126,7 +124,7 @@ public class Student {
 			System.out.println("\t* 提交成功!");
 		}
 		System.out.println("\t*********************");
-		f_following_op();
+		f_following_op(u_stu);
 
 	}
 	
@@ -135,21 +133,21 @@ public class Student {
 	/**
 	 * 2. 管理加分项
 	 * 		2.1. 查看加分项
-	 * 		2.2. 修改加分项
-	 * 		2.3. 删除加分项
+	 * 		2.2. 修改加分项(未启用)
+	 * 		2.3. 删除加分项(未启用)
 	 */
 	
 	/*
 	 *  2.1 查看加分项
 	 */
 	
-	public static void Search() {
+	public static void Search(StuUser u_stu) {
 		
 		System.out.println("\n");
 		System.out.println("\t** 查看已申请的加分项 **");
 		System.out.println("\t* 请选择想要继续的操作: ");
 		System.out.println("\t  1. \t查看所有已申请的加分项");
-		System.out.println("\t  2. \t按年份查看已申请的加分项");
+		System.out.println("\t  2. \t按年份查看已申请的加分项(未启用)");
 		System.out.println("\t  3. \t按类别查看已申请的加分项");
 		System.out.print("\t* 请输入序号: ");
 		Scanner in = new Scanner(System.in);
@@ -158,23 +156,24 @@ public class Student {
 			if(k.equals("1")) {	// 查看所有已申请的加分项
 				// me_etr
 				System.out.println("\n\t* 德育加分项");
-				s_getExtrasBy("me_etr");
+				s_getExtrasBy(u_stu,"me_etr");
 				
 				// me_mns
 				System.out.println("\n\t* 德育减分项");
-				s_getExtrasBy("me_mns");
+				s_getExtrasBy(u_stu,"me_mns");
 				 
 				// ie_mtr
 				System.out.println("\n\t* 智育加分项");
-				s_getExtrasBy("ie_etr");
+				s_getExtrasBy(u_stu,"ie_etr");
 				
 				// pe_mtr
 				System.out.println("\n\t* 体育加分项");
-				s_getExtrasBy("pe_etr");
+				s_getExtrasBy(u_stu,"pe_etr");
 				break;
 			}
 			else if(k.equals("2")) {	// 按年份查看已申请的加分项
-				
+				f_end(u_stu);
+				break;
 			}
 			else if(k.equals("3")) {	// 按类别查看已申请的加分项
 				System.out.println("\n");
@@ -186,7 +185,7 @@ public class Student {
 				System.out.print("\t* 请输入序号: ");
 				in = new Scanner(System.in);
 				k = in.next();
-				s_getExtrasBy(j_getExtraName(k));
+				s_getExtrasBy(u_stu,j_getExtraName(k));
 				break;
 			}
 			else {
@@ -196,7 +195,7 @@ public class Student {
 			}
 		}
 		System.out.println("\n\t*********************");
-		f_following_op();
+		f_following_op(u_stu);
 	}
 		
 	
@@ -208,9 +207,9 @@ public class Student {
 	//f_: 实现其他功能
 	
 	// 按类别打印某同学的加分项
-	public static void s_getExtrasBy(String etr) {
+	public static void s_getExtrasBy(StuUser u_stu,String etr) {
 		Map<Integer, Extra> r_extras = new HashMap<Integer, Extra>();
-		stuDeclareDAOImpl search = new stuDeclareDAOImpl();
+		stuDeclareDAO search = new stuDeclareDAO();
 		
 		System.out.println("\t| 序号 | 年份 | 加分项名称 | 申请分数 | 审核分数 | 审核状态 | 是否通过 |");
 		r_extras = search.queryExtrasBy(u_stu.getS_no(),etr);
@@ -254,7 +253,9 @@ public class Student {
 				System.out.println("\t* 分值超出范围! 请重新输入:");
 				Scanner in = new Scanner(System.in);
 				k = in.next();
-				in.close();
+			}
+			else {
+				break;
 			}
 		}
 	}
@@ -308,7 +309,7 @@ public class Student {
 	}
 	
 	// 后续操作指示函数
-	public static void f_following_op() {
+	public static void f_following_op(StuUser u_stu) {
 		System.out.println("\t* 请选择后续要进行的操作: ");
 		System.out.println("\t  1. \t继续申报加分项");
 		System.out.println("\t  2. \t返回主菜单");
@@ -316,13 +317,13 @@ public class Student {
 		System.out.print("\t* 请输入序号: ");
 		Scanner in = new Scanner(System.in);
 		String k = in.next();
-		in.close();
 		while(true) {
 			if(k.equals("1")) {
-				Declare();
+				Declare(u_stu);
 				break;
 			}
 			else if(k.equals("2")) {	//
+				ExtraPoint(u_stu);
 				break;
 			}
 			else if(k.equals("3")) {	//退出系统
@@ -332,10 +333,31 @@ public class Student {
 				System.out.println("\t* 输入错误! 请重新输入序号:");
 				Scanner inn = new Scanner(System.in);
 				k = in.next();
-				inn.close();
 			}
 		}
 	}
 
-	
+	// 功能未启用后续操作指示函数
+	public static void f_end(StuUser u_stu) {
+		System.out.println("\t* 该功能未启用,请选择后续操作: ");
+		System.out.println("\t  1. \t返回主菜单");
+		System.out.println("\t  2. \t退出系统");
+		System.out.print("\t* 请输入序号: ");
+		Scanner in = new Scanner(System.in);
+		String k = in.next();
+		while(true) {
+			if(k.equals("1")) {
+				ExtraPoint(u_stu);
+				break;
+			}
+			else if(k.equals("2")) {	//退出系统
+				System.exit(0);
+			}
+			else {
+				System.out.println("\t* 输入错误! 请重新输入序号:");
+				Scanner inn = new Scanner(System.in);
+				k = in.next();
+			}
+		}
+	}
 }
