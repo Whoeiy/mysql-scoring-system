@@ -1,5 +1,9 @@
 package tw.yz.domain;
 
+/**
+ * 加分项明细
+ */
+
 public class Extra {
 	private String year;
 	private String s_no;
